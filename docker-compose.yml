@@ -1,0 +1,12 @@
+axonserver:
+  image: axoniq/axonserver
+  environment:
+    - AXONSERVER_HOSTNAME=axonserver
+  ports:
+    - "8024:8024"
+    - "8124:8124"
+
+redis:
+  image: redis
+  ports:
+    - "6379:6379"
