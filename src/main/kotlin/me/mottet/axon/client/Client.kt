@@ -1,15 +1,13 @@
-package me.mottet.axon
+package me.mottet.axon.client
 
 import me.mottet.axon.domain.cart.AddProduct
 import me.mottet.axon.domain.cart.CreateCart
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
-import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
 import java.util.*
 
-@Profile("client")
 @Component
 class Client(val commandGateway: CommandGateway) : CommandLineRunner {
     private val logger = LoggerFactory.getLogger(javaClass)
