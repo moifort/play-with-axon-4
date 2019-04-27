@@ -1,4 +1,4 @@
-package me.mottet.axon.query
+package me.mottet.axon.query.cart
 
 import org.springframework.data.repository.CrudRepository
 import java.util.*
