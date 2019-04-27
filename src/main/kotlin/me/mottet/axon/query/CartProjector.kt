@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component
 
 @Profile("query")
 @Component
-class CartProjector {
+class CartProjector(val cartDetailRepository: CartDetailRepository) {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @EventHandler
     fun on(cartCreated: CartCreated) {
         logger.debug("projector {}", cartCreated)
+        cartDetailRepository.save(CartDetail(cartCreated.id, cartCreated.userId, 0))
     }
 
     @EventHandler
