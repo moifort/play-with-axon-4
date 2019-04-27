@@ -13,10 +13,7 @@ class Client(val commandGateway: CommandGateway) : CommandLineRunner {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     override fun run(vararg args: String) {
-
-
         val clientId = UUID.randomUUID()
-
         (1..20).forEach {
             logger.debug("run: $it")
             val cartId = UUID.randomUUID()
