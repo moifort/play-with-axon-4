@@ -1,6 +1,5 @@
 package me.mottet.axon.client
 
-import me.mottet.axon.domain.cart.AddProduct
 import me.mottet.axon.query.cart.CartDetail
 import me.mottet.axon.query.cart.CartDetailQuery
 import org.axonframework.commandhandling.gateway.CommandGateway
@@ -28,8 +27,8 @@ class Client(val commandGateway: CommandGateway, val queryGateway: QueryGateway)
 //        }
 
         val cartId = UUID.fromString("8eb73ae1-5f26-4aab-81ca-31e51b2727b4")
-        commandGateway.sendAndWait<UUID>(AddProduct(cartId, "Pantoufle", 3))
-        commandGateway.sendAndWait<UUID>(AddProduct(cartId, "iMac", 100))
+        //commandGateway.sendAndWait<UUID>(AddProduct(cartId, "Pantoufle", 3))
+        //commandGateway.sendAndWait<UUID>(AddProduct(cartId, "iMac", 100))
         val query = queryGateway.query(CartDetailQuery(cartId), ResponseTypes.instanceOf(CartDetail::class.java)).join()
         logger.debug("query {}", query)
     }
