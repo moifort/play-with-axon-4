@@ -4,7 +4,7 @@ axon.axonserver.servers: localhost:8124
 
 ---
 spring:
-  profiles: command
+  profiles: domain
   main:
     web-application-type: none
 
