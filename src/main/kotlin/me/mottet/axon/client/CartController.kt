@@ -16,11 +16,15 @@ import java.util.*
 class CartController(val commandGateway: CommandGateway, val queryGateway: QueryGateway) {
 
     @GetMapping("/create")
-    fun createCart() = commandGateway.sendAndWait<UUID>(CreateCart(UUID.randomUUID(), UUID.randomUUID()))
+    fun createCart(@RequestParam(required = false) cartId: String = UUID.randomUUID().toString(),
+                   @RequestParam(required = false) userId: String = UUID.randomUUID().toString()) =
+            commandGateway.sendAndWait<String>(CreateCart(cartId, userId))
 
     @GetMapping("/add")
-    fun addProduct(@RequestParam cartId: String) = commandGateway.sendAndWait<UUID>(AddProduct(UUID.fromString(cartId), "Pantoufle", 3))
+    fun addProduct(@RequestParam cartId: String) =
+            commandGateway.sendAndWait<String>(AddProduct(cartId, "Pantoufle", 3))
 
     @GetMapping("/{id}/detail")
-    fun detail(@PathVariable("id") cartId: String) = queryGateway.query(CartDetailQuery(UUID.fromString(cartId)), ResponseTypes.instanceOf(CartDetail::class.java)).join()
+    fun detail(@PathVariable("id") cartId: String) =
+            queryGateway.query(CartDetailQuery(cartId), ResponseTypes.instanceOf(CartDetail::class.java)).join()
 }

@@ -6,14 +6,13 @@ import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle.apply
 import org.axonframework.spring.stereotype.Aggregate
 import org.slf4j.LoggerFactory
-import java.util.*
 
 @Aggregate
 class Cart {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @AggregateIdentifier
-    private lateinit var id: UUID
+    private lateinit var id: String
 
     constructor()
 
