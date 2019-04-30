@@ -11,11 +11,12 @@ import org.springframework.data.redis.connection.RedisConnectionFactory
 import org.springframework.data.redis.listener.PatternTopic
 import org.springframework.data.redis.listener.RedisMessageListenerContainer
 import org.springframework.stereotype.Component
-import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import springfox.documentation.swagger2.annotations.EnableSwagger2
+
 
 @Configuration
 @Profile("client")
-@EnableWebMvc
+@EnableSwagger2
 @ComponentScan
 class ClientConfiguration {
     @Bean
