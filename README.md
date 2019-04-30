@@ -12,6 +12,9 @@
 * Start domain: `java -Dspring.profiles.active=domain -jar target/axon-0.0.1-SNAPSHOT.jar`
 * Start query: `java -Dspring.profiles.active=query -jar target/axon-0.0.1-SNAPSHOT.jar`
 * Start client: `java -Dspring.profiles.active=client -jar target/axon-0.0.1-SNAPSHOT.jar`
+* Go to: http://localhost:8080/swagger-ui.html
+
+![AxonServer](./static/swagger.png)
 
 ## How to
 

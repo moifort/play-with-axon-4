@@ -17,7 +17,7 @@ class CartController(val commandGateway: CommandGateway, val queryGateway: Query
 
     @GetMapping("/create")
     fun createCart(@RequestParam(required = false) cartId: String = UUID.randomUUID().toString(),
-                   @RequestParam(required = false) userId: String = UUID.randomUUID().toString()) =
+                   @RequestParam userId: String) =
             commandGateway.sendAndWait<String>(CreateCart(cartId, userId))
 
     @GetMapping("/add")
