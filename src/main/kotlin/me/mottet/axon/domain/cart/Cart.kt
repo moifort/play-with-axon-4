@@ -25,7 +25,7 @@ class Cart {
     @CommandHandler
     fun addProduct(addProduct: AddProduct) {
         logger.debug("handling {}", addProduct)
-        apply(ProductAdded(addProduct.id, addProduct.productName, addProduct.quantity))
+        apply(ProductAdded(addProduct.id, addProduct.name, addProduct.unitPrice, addProduct.quantity))
     }
 
 

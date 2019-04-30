@@ -21,8 +21,11 @@ class CartController(val commandGateway: CommandGateway, val queryGateway: Query
             commandGateway.sendAndWait<String>(CreateCart(cartId, userId))
 
     @GetMapping("/add")
-    fun addProduct(@RequestParam cartId: String) =
-            commandGateway.sendAndWait<String>(AddProduct(cartId, "Pantoufle", 3))
+    fun addProduct(@RequestParam cartId: String,
+                   @RequestParam name: String,
+                   @RequestParam unitPrice: Double,
+                   @RequestParam quantity: Int) =
+            commandGateway.sendAndWait<String>(AddProduct(cartId, name, unitPrice, quantity))
 
     @GetMapping("/{id}/detail")
     fun detail(@PathVariable("id") cartId: String) =

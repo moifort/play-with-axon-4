@@ -17,7 +17,7 @@ class CartProjector(val cartDetailRepository: CartDetailRepository) {
     @EventHandler
     fun on(cartCreated: CartCreated) {
         logger.debug("projector {}", cartCreated)
-        cartDetailRepository.save(CartDetail(cartCreated.id, cartCreated.userId, 0))
+        cartDetailRepository.save(CartDetail(cartCreated.id, cartCreated.userId, 0.0, 0, listOf()))
     }
 
     @EventHandler
@@ -25,8 +25,10 @@ class CartProjector(val cartDetailRepository: CartDetailRepository) {
         logger.debug("projector {}", productAdded)
         val cartDetail = cartDetailRepository.findByIdOrNull(productAdded.id)
                 ?: throw Exception("Cart not found: ${productAdded.id}")
-        val totalProduct = productAdded.quantity + cartDetail.productCount
-        cartDetailRepository.save(CartDetail(cartDetail.id, cartDetail.userId, totalProduct))
+        val numberOfProduct = cartDetail.numberOfProduct + productAdded.quantity
+        val products = cartDetail.products + Product(productAdded.name, productAdded.quantity, productAdded.unitPrice)
+        val totalPrice = cartDetail.totalPrice + (productAdded.quantity * productAdded.unitPrice)
+        cartDetailRepository.save(CartDetail(cartDetail.id, cartDetail.userId, totalPrice, numberOfProduct, products))
     }
 
     @QueryHandler
