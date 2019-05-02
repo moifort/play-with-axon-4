@@ -11,7 +11,7 @@ services:
   redis:
     image: redis
     hostname: redis
-    command: ["--notify-keyspace-events", "Egx"]
+    command: ["--notify-keyspace-events", "AKE"]
     ports:
       - "6379:6379"
 

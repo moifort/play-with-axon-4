@@ -14,18 +14,25 @@
 * Start client: `java -Dspring.profiles.active=client -jar target/axon-0.0.1-SNAPSHOT.jar`
 * Go to: http://localhost:8080/swagger-ui.html
 
-![AxonServer](./static/swagger.png)
+![Swagger](static/swagger.png)
 
 ## How to
 
+## Problematic
+
+### Data synchronization
+
+### Update event source
+
+### Rebuild projection
 
 ## Admin
 * Access AxonServer UI: http://localhost:8024
 
-![AxonServer](./static/axonserver.png)
+![AxonServer](static/axonserver.png)
 
 * Access to Redis UI: http://localhost:9090
 
-![Redis](./static/redis.png)
+![Redis](static/redis.png)
  
 

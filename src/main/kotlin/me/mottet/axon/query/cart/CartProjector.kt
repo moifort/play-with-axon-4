@@ -5,11 +5,9 @@ import me.mottet.axon.domain.cart.ProductAdded
 import org.axonframework.eventhandling.EventHandler
 import org.axonframework.queryhandling.QueryHandler
 import org.slf4j.LoggerFactory
-import org.springframework.context.annotation.Profile
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 
-@Profile("query")
 @Component
 class CartProjector(val cartDetailRepository: CartDetailRepository) {
     private val logger = LoggerFactory.getLogger(javaClass)
