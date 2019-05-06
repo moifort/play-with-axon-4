@@ -4,6 +4,8 @@ services:
     image: axoniq/axonserver
     environment:
       - AXONSERVER_HOSTNAME=axonserver
+    volumes:
+      - ./data:/opt/axonserver/data
     ports:
       - "8024:8024"
       - "8124:8124"
