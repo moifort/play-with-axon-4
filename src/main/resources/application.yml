@@ -1,0 +1,15 @@
+spring.application.name: axon-${spring.profiles.active}
+logging.level.me.mottet.axon: DEBUG
+axon.axonserver.servers: localhost:8124
+
+---
+spring:
+  profiles: domain
+  main:
+    web-application-type: none
+
+---
+spring:
+  profiles: query
+  main:
+    web-application-type: none
