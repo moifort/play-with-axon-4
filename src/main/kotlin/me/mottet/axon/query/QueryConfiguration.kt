@@ -16,6 +16,8 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @ComponentScan
 @EnableRedisRepositories
 class QueryConfiguration {
+
+
     @Bean
     fun keyExpirationListenerContainer(connectionFactory: RedisConnectionFactory, expirationListenerCart: CartKeyListener): RedisMessageListenerContainer {
         val listenerContainer = RedisMessageListenerContainer()

@@ -8,7 +8,8 @@ data class CartDetail(@Id val id: String,
                       val userId: String,
                       val totalPrice: Double,
                       val numberOfProduct: Int,
-                      val products: List<Product> = listOf())
+                      val products: List<Product> = listOf(),
+                      val lastUpdated: Long)
 
 data class Product(val name: String,
                    val quantity: Int,

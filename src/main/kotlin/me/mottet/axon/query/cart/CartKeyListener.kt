@@ -11,12 +11,16 @@ import org.springframework.stereotype.Component
 class CartKeyListener(val queryUpdateEmitter: QueryUpdateEmitter, val cartDetailRepository: CartDetailRepository) : MessageListener {
     private val logger = LoggerFactory.getLogger(javaClass)
 
+    private val antiDebounce = mutableMapOf<String, Long>()
+
     override fun onMessage(message: Message, pattern: ByteArray?) {
         val key = String(message.body)
         if (key.startsWith("cart")) {
             logger.debug("listen: {}", key)
             val cartId = key.replace("cart:", "")
             val cartDetail = cartDetailRepository.findByIdOrNull(cartId) ?: throw Exception("Cart not found: $cartId")
+            val lastUpdated = antiDebounce.getOrDefault(key, 0L)
+            if (cartDetail.lastUpdated > lastUpdated)
             queryUpdateEmitter.emit(CartDetailQuery::class.java, { query -> cartId == query.id }, cartDetail)
         }
     }
