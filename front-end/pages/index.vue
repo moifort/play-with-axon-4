@@ -1,73 +1,64 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm8
-      md6
-    >
-      <div class="text-xs-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">Welcome to the Vuetify + Nuxt.js template</v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>For more information on Vuetify, check out the <a
-            href="https://vuetifyjs.com"
-            target="_blank"
-          >documentation</a>.</p>
-          <p>If you have questions, please join the official <a
-            href="https://chat.vuetifyjs.com/"
-            target="_blank"
-            title="chat"
-          >discord</a>.</p>
-          <p>Find a bug? Report it on the github <a
-            href="https://github.com/vuetifyjs/vuetify/issues"
-            target="_blank"
-            title="contribute"
-          >issue board</a>.</p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-          >Nuxt Documentation</a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-          >Nuxt GitHub</a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            flat
-            nuxt
-            to="/inspire"
-          >Continue</v-btn>
-        </v-card-actions>
+  <v-layout row justify-center>
+    <v-flex xs12 sm6 offset-sm3 >
+      <v-card v-if="cart.id">
+        <v-toolbar color="blue" dark>
+          <v-toolbar-side-icon></v-toolbar-side-icon>
+          <v-toolbar-title>Cart</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-icon>shopping_cart</v-icon>
+        </v-toolbar>
+        <v-list>
+          <template v-for="(item, index) in cart.products">
+            <v-list-tile :key="index">
+              <v-list-tile-content>
+                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                <v-list-tile-sub-title class="text--primary">{{ item.headline }}</v-list-tile-sub-title>
+                <v-list-tile-sub-title>{{ item.unitPrice }} € - total: {{ item.quantity * item.unitPrice }} €
+                </v-list-tile-sub-title>
+              </v-list-tile-content>
+
+              <v-list-tile-action>
+                <v-list-tile-action-text>x{{ item.quantity }}</v-list-tile-action-text>
+              </v-list-tile-action>
+
+            </v-list-tile>
+            <v-divider></v-divider>
+          </template>
+          <v-list-tile>
+            <v-list-tile-content>
+              <v-list-tile-title>Total: {{ cart.totalPrice }} €</v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-list-tile-action-text>x{{ cart.numberOfProduct }}</v-list-tile-action-text>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list>
       </v-card>
+      <div v-else>
+        <v-btn color="blue" dark block @click="create">Create Cart</v-btn>
+      </div>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+  import {mapState, mapActions} from 'vuex'
 
-export default {
-  components: {
-    Logo,
-    VuetifyLogo
+
+  export default {
+    async fetch({store}) {
+      await store.dispatch('cart/init')
+    },
+    computed: {
+      ...mapState('cart', {
+        cart: state => state.detail,
+      }),
+    },
+    methods: {
+      ...mapActions({
+        create: 'cart/create',
+      }),
+    },
   }
-}
 </script>
