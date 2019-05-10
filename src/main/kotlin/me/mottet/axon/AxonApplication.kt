@@ -1,9 +1,16 @@
 package me.mottet.axon
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
+import me.mottet.axon.client.ClientConfiguration
+import me.mottet.axon.domain.DomainConfiguration
+import me.mottet.axon.query.QueryConfiguration
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.runApplication
+import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Import
 
-@SpringBootApplication
+@Configuration
+@EnableAutoConfiguration
+@Import(QueryConfiguration::class, DomainConfiguration::class, ClientConfiguration::class)
 class AxonApplication
 
 fun main(args: Array<String>) {

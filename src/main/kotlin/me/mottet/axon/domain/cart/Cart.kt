@@ -6,16 +6,13 @@ import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle.apply
 import org.axonframework.spring.stereotype.Aggregate
 import org.slf4j.LoggerFactory
-import org.springframework.context.annotation.Profile
-import java.util.*
 
-@Profile("command")
 @Aggregate
 class Cart {
     private val logger = LoggerFactory.getLogger(javaClass)
 
     @AggregateIdentifier
-    private lateinit var id: UUID
+    private lateinit var id: String
 
     constructor()
 
@@ -28,7 +25,7 @@ class Cart {
     @CommandHandler
     fun addProduct(addProduct: AddProduct) {
         logger.debug("handling {}", addProduct)
-        apply(ProductAdded(addProduct.id, addProduct.productName, addProduct.quantity))
+        apply(ProductAdded(addProduct.id, addProduct.name, addProduct.unitPrice, addProduct.quantity))
     }
 
 
