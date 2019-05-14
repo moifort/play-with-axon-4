@@ -4,7 +4,6 @@ import me.mottet.axon.domain.cart.CartCreated
 import me.mottet.axon.domain.cart.ProductAdded
 import org.axonframework.eventhandling.EventHandler
 import org.axonframework.eventhandling.Timestamp
-import org.axonframework.messaging.annotation.MetaDataValue
 import org.axonframework.queryhandling.QueryHandler
 import org.slf4j.LoggerFactory
 import org.springframework.data.repository.findByIdOrNull

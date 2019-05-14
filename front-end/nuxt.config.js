@@ -41,7 +41,6 @@ export default {
   */
   plugins: [
     '@/plugins/vuetify',
-    '@/plugins/websocket',
   ],
 
   /*

@@ -17,12 +17,10 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @EnableRedisRepositories
 class QueryConfiguration {
 
-
     @Bean
-    fun keyExpirationListenerContainer(connectionFactory: RedisConnectionFactory, expirationListenerCart: CartKeyListener): RedisMessageListenerContainer {
-        val listenerContainer = RedisMessageListenerContainer()
-        listenerContainer.setConnectionFactory(connectionFactory)
-        listenerContainer.addMessageListener(expirationListenerCart, PatternTopic("__keyevent@*__:hset"))
-        return listenerContainer
-    }
+    fun keyListenerContainer(connectionFactory: RedisConnectionFactory, keyListener: CartKeyListener) =
+            RedisMessageListenerContainer().apply {
+                setConnectionFactory(connectionFactory)
+                addMessageListener(keyListener, PatternTopic("__keyevent@*__:hset"))
+            }
 }
